@@ -1,7 +1,8 @@
 "use client";
 import { builder, Builder, withChildren } from "@builder.io/react";
-import { Button } from "./components/ui/button";
+import Button from "./components/Button/Button";
 import Counter from "./components/Counter/Counter";
+import PlainText from "./components/PlainText/PlainText";
 
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
 
@@ -15,9 +16,29 @@ Builder.registerComponent(Counter, {
   ],
 });
 
+Builder.registerComponent(PlainText, {
+  name: "PlainText",
+  inputs: [
+    {
+      name: "text",
+      type: "string",
+      required: true,
+      defaultValue: "Plain Text",
+    },
+  ],
+  defaultStyles: {
+    margin: "0 0 0 0",
+  },
+});
+
 Builder.registerComponent(withChildren(Button), {
   name: "Button",
   inputs: [
+    {
+      name: "buttonElement",
+      type: "string",
+      enum: ["button", "link"],
+    },
     {
       name: "children",
       type: "string",
@@ -27,16 +48,21 @@ Builder.registerComponent(withChildren(Button), {
       },
     },
     {
-      name: "variant",
+      name: "href",
       type: "string",
-      enum: ["default", "destructive", "outline", "secondary", "ghost", "link"],
-      defaultValue: "default",
+      meta: {
+        ts: "Url",
+      },
     },
     {
       name: "size",
       type: "string",
-      enum: ["default", "sm", "lg", "icon"],
-      defaultValue: "default",
+      enum: ["default", "icon", "lg", "sm"],
+    },
+    {
+      name: "variant",
+      type: "string",
+      enum: ["default", "destructive", "ghost", "link", "outline", "secondary"],
     },
   ],
 });
