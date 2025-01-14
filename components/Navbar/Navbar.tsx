@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./styles.module.css";
 
 interface NavbarProps {
   children: React.ReactNode;
@@ -13,7 +14,7 @@ export default function Navbar(props: NavbarProps) {
   }
   return (
     <header
-      className={`flex p-2 gap-2 content-center justify-between ${shadow} shadow-${props.shadow} ${props.className}`}>
+      className={`${styles.navbar} ${shadow} shadow-${props.shadow} ${props.className}`}>
       {props.children}
     </header>
   );
