@@ -8,13 +8,13 @@ interface NavbarProps {
 }
 
 export default function Navbar(props: NavbarProps) {
+  const className = props.className ? props.className : "";
   let shadow = "";
-  if (props.shadow !== "none") {
-    shadow = "shadow";
-  }
+  if (props.shadow !== "none") shadow = "shadow";
+
   return (
     <header
-      className={`${styles.navbar} ${shadow} shadow-${props.shadow} ${props.className}`}>
+      className={`${styles.navbar} ${shadow} shadow-${props.shadow} ${className}`}>
       {props.children}
     </header>
   );

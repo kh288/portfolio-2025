@@ -1,25 +1,10 @@
 "use client";
 import { builder, Builder, withChildren } from "@builder.io/react";
-import PlainText from "@/components/PlainText";
-import Button from "@/components/Button";
-import Navbar from "@/components/Navbar";
+import Button from "@/components/Button/Button";
+import Navbar from "@/components/Navbar/Navbar";
+import Header from "./components/Header/Header";
 
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
-
-Builder.registerComponent(PlainText, {
-  name: "PlainText",
-  inputs: [
-    {
-      name: "text",
-      type: "string",
-      required: true,
-      defaultValue: "Plain Text",
-    },
-  ],
-  defaultStyles: {
-    margin: "0 0 0 0",
-  },
-});
 
 Builder.registerComponent(withChildren(Button), {
   name: "Button",
@@ -42,6 +27,7 @@ Builder.registerComponent(withChildren(Button), {
       name: "variant",
       type: "string",
       enum: ["default", "secondary", "ghost", "link", "outline", "destructive"],
+      defaultValue: "default",
     },
     {
       name: "size",
@@ -83,6 +69,36 @@ Builder.registerComponent(withChildren(Navbar), {
       enum: ["none", "sm", "md", "lg", "xl", "2xl"],
       required: true,
       defaultValue: "none",
+    },
+  ],
+});
+
+Builder.registerComponent(Header, {
+  name: "Header",
+  inputs: [
+    {
+      name: "headerElement",
+      type: "string",
+      defaultValue: "h1",
+      enum: ["h1", "h2", "h3", "h4", "h5", "h6"],
+      required: true,
+    },
+    {
+      name: "text",
+      type: "string",
+      defaultValue: "Header",
+      required: true,
+    },
+    {
+      name: "bold",
+      type: "boolean",
+      defaultValue: true,
+      required: true,
+    },
+    {
+      name: "italic",
+      type: "boolean",
+      required: true,
     },
   ],
 });

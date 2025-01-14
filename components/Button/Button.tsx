@@ -1,20 +1,21 @@
 import React from "react";
 import Link from "next/link";
-import "./styles.css";
+import styles from "./styles.module.css";
 import { Url } from "next/dist/shared/lib/router/router";
 
 interface ButtonProps {
   children: React.ReactNode;
-  variant?:
+  variant:
     | "default"
     | "destructive"
     | "outline"
     | "secondary"
     | "ghost"
     | "link";
-  size?: "default" | "sm" | "lg" | "icon";
+  size: "default" | "sm" | "lg" | "icon";
   buttonElement?: "button" | "link";
   href?: Url;
+  className?: string;
 }
 
 export default function Button(props: ButtonProps) {
@@ -23,13 +24,18 @@ export default function Button(props: ButtonProps) {
     return (
       <Link
         href={hrefURL}
-        className={`button button-${props.variant} size-${props.size}`}>
+        className={`${styles.button} ${styles[`button-${props.variant}`]} ${
+          styles[`size-${props.size}`]
+        }`}>
         {props.children}
       </Link>
     );
   } else {
     return (
-      <button className={`button button-${props.variant} size-${props.size}`}>
+      <button
+        className={`${props.className} ${styles.button} ${
+          styles[`button-${props.variant}`]
+        } ${styles[`size-${props.size}`]}`}>
         {props.children}
       </button>
     );
