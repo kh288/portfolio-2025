@@ -1,8 +1,9 @@
 "use client";
 import { builder, Builder, withChildren } from "@builder.io/react";
-import Button from "@/components/Button/Button";
-import Navbar from "@/components/Navbar/Navbar";
+import Button from "./components/Button/Button";
+import FlexGroup from "./components/FlexGroup/FlexGroup";
 import Header from "./components/Header/Header";
+import Navbar from "./components/Navbar/Navbar";
 
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
 
@@ -59,16 +60,21 @@ Builder.registerComponent(withChildren(Navbar), {
     },
     {
       name: "className",
-      friendlyName: "Custom CSS Class",
       type: "string",
-      required: false,
+      friendlyName: "Custom CSS Class",
+    },
+    {
+      name: "padding",
+      type: "number",
+      required: true,
+      defaultValue: 2,
     },
     {
       name: "shadow",
       type: "string",
+      defaultValue: "none",
       enum: ["none", "sm", "md", "lg", "xl", "2xl"],
       required: true,
-      defaultValue: "none",
     },
   ],
 });
@@ -98,6 +104,44 @@ Builder.registerComponent(Header, {
     {
       name: "italic",
       type: "boolean",
+      required: true,
+    },
+  ],
+});
+
+Builder.registerComponent(withChildren(FlexGroup), {
+  name: "FlexGroup",
+  inputs: [
+    {
+      name: "children",
+      type: "string",
+      hideFromUI: true,
+      meta: {
+        ts: "ReactNode",
+      },
+    },
+    {
+      name: "gap",
+      type: "string",
+      defaultValue: "0",
+    },
+    {
+      name: "justify",
+      type: "string",
+      enum: [
+        "center",
+        "end",
+        "flex-end",
+        "flex-start",
+        "inherit",
+        "left",
+        "right",
+        "space-around",
+        "space-between",
+        "space-evenly",
+        "start",
+        "stretch",
+      ],
       required: true,
     },
   ],

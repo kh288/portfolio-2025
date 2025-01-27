@@ -1,0 +1,7 @@
+.navbar {
+  @apply flex p-2 gap-2 content-center justify-between;
+}
+
+.padding[padding-data] {
+  padding: attr(padding-data number) * 0.25rem;
+}
