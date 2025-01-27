@@ -143,6 +143,13 @@ Builder.registerComponent(withChildren(FlexGroup), {
         "stretch",
       ],
       required: true,
+      defaultValue: "start",
+    },
+    {
+      name: "padding",
+      type: "number",
+      required: true,
+      defaultValue: 0,
     },
   ],
 });
