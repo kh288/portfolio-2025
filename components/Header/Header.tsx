@@ -1,25 +1,28 @@
-import React from "react";
+import React, { JSX } from "react";
 import styles from "./Header.module.css";
 
 interface HeaderProps {
-  text: string;
   headerElement: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+  text: string;
   bold: boolean;
   italic: boolean;
-  fontSize: number;
 }
 
-export default function Header(props: HeaderProps) {
+/**
+ * @description A component that renders a header element
+ * @param {"h1" | "h2" | "h3" | "h4" | "h5" | "h6"} props.headerElement - The header element to render
+ * @param {string} props.text - The text to render in the header
+ * @param {boolean} props.bold - Whether the header should be bold
+ * @param {boolean} props.italic - Whether the header should be italic
+ * @returns {JSX.Element} The Header component `<h*>Header</h*>`
+ */
+export default function Header(props: HeaderProps): JSX.Element {
   const HeaderElement = props.headerElement;
-  const bold = props.bold ? "font-bold" : "";
-  const italic = props.italic ? "italic" : "";
-  const fontSize = props.fontSize;
   return (
     <HeaderElement
-      className={`${styles.header} ${
-        styles[props.headerElement]
-      } ${bold} ${italic}`}
-      style={{ fontSize: fontSize }}>
+      className={`${styles.header} ${styles[props.headerElement]} ${
+        props.bold ? "font-bold" : ""
+      } ${props.italic ? "italic" : ""}`}>
       {props.text}
     </HeaderElement>
   );

@@ -1,7 +1,7 @@
 "use client";
 import { builder, Builder, withChildren } from "@builder.io/react";
 import Button from "./components/Button/Button";
-import FlexGroup from "./components/FlexGroup/FlexGroup";
+import DisplayContainer from "./components/DisplayContainer/DisplayContainer";
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 
@@ -59,15 +59,10 @@ Builder.registerComponent(withChildren(Navbar), {
       },
     },
     {
-      name: "className",
-      type: "string",
-      friendlyName: "Custom CSS Class",
-    },
-    {
       name: "padding",
       type: "number",
-      required: true,
       defaultValue: 2,
+      required: true,
     },
     {
       name: "shadow",
@@ -83,10 +78,21 @@ Builder.registerComponent(Header, {
   name: "Header",
   inputs: [
     {
+      name: "bold",
+      type: "boolean",
+      defaultValue: true,
+      required: true,
+    },
+    {
       name: "headerElement",
       type: "string",
       defaultValue: "h1",
       enum: ["h1", "h2", "h3", "h4", "h5", "h6"],
+      required: true,
+    },
+    {
+      name: "italic",
+      type: "boolean",
       required: true,
     },
     {
@@ -95,22 +101,11 @@ Builder.registerComponent(Header, {
       defaultValue: "Header",
       required: true,
     },
-    {
-      name: "bold",
-      type: "boolean",
-      defaultValue: true,
-      required: true,
-    },
-    {
-      name: "italic",
-      type: "boolean",
-      required: true,
-    },
   ],
 });
 
-Builder.registerComponent(withChildren(FlexGroup), {
-  name: "FlexGroup",
+Builder.registerComponent(withChildren(DisplayContainer), {
+  name: "DisplayContainer",
   inputs: [
     {
       name: "children",
@@ -121,13 +116,24 @@ Builder.registerComponent(withChildren(FlexGroup), {
       },
     },
     {
-      name: "gap",
+      name: "display",
       type: "string",
-      defaultValue: "0",
+      enum: [
+        "block",
+        "flex",
+        "grid",
+        "inline-block",
+        "inline-flex",
+        "inline-grid",
+        "none",
+      ],
+      required: true,
+      defaultValue: "block",
     },
     {
       name: "justify",
       type: "string",
+      defaultValue: "start",
       enum: [
         "center",
         "end",
@@ -143,13 +149,30 @@ Builder.registerComponent(withChildren(FlexGroup), {
         "stretch",
       ],
       required: true,
-      defaultValue: "start",
+    },
+    {
+      name: "gap",
+      type: "string",
+      defaultValue: "0",
+    },
+    {
+      name: "marginAuto",
+      type: "boolean",
+      required: true,
+      defaultValue: false,
+    },
+    {
+      showIf: (options) => !options.get("marginAuto"),
+      name: "margin",
+      type: "number",
+      required: true,
+      defaultValue: 0,
     },
     {
       name: "padding",
       type: "number",
-      required: true,
       defaultValue: 0,
+      required: true,
     },
   ],
 });
